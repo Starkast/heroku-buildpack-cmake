@@ -40,4 +40,4 @@ mv /tmp/${TARBALL%.*.*}/bin "$BUILD_DIR/.heroku/cmake/"
 mv /tmp/${TARBALL%.*.*}/share "$BUILD_DIR/.heroku/cmake/"
 
 echo "Exporting PATH" | indent
-echo "export PATH=\"\$PATH:$BUILD_DIR/.heroku/node/bin" > $BP_DIR/export
+echo "export PATH=\"\$PATH:$BUILD_DIR/.heroku/cmake/bin" > $BP_DIR/export
