@@ -3,6 +3,7 @@
 
 set -u # stop on unset variables
 set -e # stop on error
+set -x # echo commands
 
 indent() {
   sed -u 's/^/       /'
