@@ -30,7 +30,7 @@ curl --silent --retry 5 $BASE_URL/$CHECKSUMS --output /tmp/$CHECKSUMS
 echo "Verifying download" | indent
 gpg --keyserver pgp.mit.edu --recv 7BFB4EDA
 gpg --verbose --verify $SIGNATURE $CHECKSUMS
-cat $CHECKSUMS | grep $TARBALL | shasum -a 256 -c -
+grep $(shasum -a 256 /tmp/$TARBALL) /tmp/$CHECKSUMS
 
 echo "Extracting download" | indent
 tar xzf /tmp/$TARBALL -C /tmp
