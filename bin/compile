@@ -17,28 +17,31 @@ BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
 CMAKE_VERSION="3.8.1"
 BASE_URL="https://cmake.org/files/v3.8"
 TARBALL="cmake-$CMAKE_VERSION-Linux-x86_64.tar.gz"
-SIGNATURE="cmake-$CMAKE_VERSION--SHA-256.txt.asc"
-CHECKSUMS="cmake-$CMAKE_VERSION--SHA-256.txt"
+SIGNATURE="cmake-$CMAKE_VERSION-SHA-256.txt.asc"
+CHECKSUMS="cmake-$CMAKE_VERSION-SHA-256.txt"
+TARBALL_PATH="/tmp/$TARBALL"
+SIGNATURE_PATH="/tmp/$SIGNATURE"
+CHECKSUMS_PATH="/tmp/$CHECKSUMS"
 
 echo "-----> Installing CMake version: $CMAKE_VERSION"
 
 echo "Downloading binary distribution" | indent
-curl --silent --retry 5 $BASE_URL/$TARBALL   --output /tmp/$TARBALL
-curl --silent --retry 5 $BASE_URL/$SIGNATURE --output /tmp/$SIGNATURE
-curl --silent --retry 5 $BASE_URL/$CHECKSUMS --output /tmp/$CHECKSUMS
+curl --silent --retry 5 $BASE_URL/$TARBALL   --output $TARBALL_PATH
+curl --silent --retry 5 $BASE_URL/$SIGNATURE --output $SIGNATURE_PATH
+curl --silent --retry 5 $BASE_URL/$CHECKSUMS --output $CHECKSUMS_PATH
 
 echo "Verifying download" | indent
-gpg --keyserver pgp.mit.edu --recv 7BFB4EDA
-gpg --verbose --verify $SIGNATURE $CHECKSUMS
-grep $(shasum -a 256 /tmp/$TARBALL) /tmp/$CHECKSUMS
+gpg --quiet --keyserver pgp.mit.edu --recv 7BFB4EDA
+gpg --quiet --verify $SIGNATURE_PATH $CHECKSUMS_PATH
+grep $(shasum -a 256 $TARBALL_PATH) $CHECKSUMS_PATH
 
 echo "Extracting download" | indent
-tar xzf /tmp/$TARBALL -C /tmp
+tar xzf TARBALL_PATH -C /tmp
 
 echo "Moving binary" | indent
 mkdir -p "$BUILD_DIR/.heroku/cmake/"
-mv /tmp/${TARBALL%.*.*}/bin "$BUILD_DIR/.heroku/cmake/"
-mv /tmp/${TARBALL%.*.*}/share "$BUILD_DIR/.heroku/cmake/"
+mv ${TARBALL_PATH%.*.*}/bin "$BUILD_DIR/.heroku/cmake/"
+mv ${TARBALL_PATH%.*.*}/share "$BUILD_DIR/.heroku/cmake/"
 
 echo "Exporting PATH" | indent
 echo "export PATH=\"\$PATH:$BUILD_DIR/.heroku/cmake/bin" > $BP_DIR/export
