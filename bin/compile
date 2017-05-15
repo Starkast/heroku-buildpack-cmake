@@ -36,7 +36,7 @@ gpg --quiet --verify $SIGNATURE_PATH $CHECKSUMS_PATH
 grep $(shasum -a 256 $TARBALL_PATH) $CHECKSUMS_PATH
 
 echo "Extracting download" | indent
-tar xzf TARBALL_PATH -C /tmp
+tar xzf $TARBALL_PATH -C /tmp
 
 echo "Moving binary" | indent
 mkdir -p "$BUILD_DIR/.heroku/cmake/"
