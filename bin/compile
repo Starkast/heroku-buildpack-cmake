@@ -1,6 +1,9 @@
 #!/bin/sh
 # bin/compile BUILD_DIR CACHE_DIR ENV_DIR
 
+set -u # stop on unset variables
+set -e # stop on error
+
 indent() {
   sed -u 's/^/       /'
 }
