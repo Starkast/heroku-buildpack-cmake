@@ -30,7 +30,7 @@ curl --silent --retry 5 $BASE_URL/$SIGNATURE --output $SIGNATURE_PATH
 curl --silent --retry 5 $BASE_URL/$CHECKSUMS --output $CHECKSUMS_PATH
 
 echo "Verifying download" | indent
-gpg --quiet --keyserver pgp.mit.edu --recv 7BFB4EDA
+gpg --quiet --keyserver keys.gnupg.net --recv 7BFB4EDA
 gpg --quiet --verify $SIGNATURE_PATH $CHECKSUMS_PATH
 grep $(shasum -a 256 $TARBALL_PATH) $CHECKSUMS_PATH
 
