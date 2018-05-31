@@ -1,0 +1,7 @@
+#!/bin/sh
+
+set -u # stop on unset variables
+set -e # stop on error
+set -x # echo commands
+
+docker run -it -v $(pwd):/app/buildpack:ro heroku/buildpack-testrunner
