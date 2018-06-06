@@ -44,3 +44,6 @@ mv ${TARBALL_PATH%.*.*}/share "$BUILD_DIR/.heroku/cmake/"
 
 echo "Exporting PATH" | indent
 echo "export PATH=\"\$PATH:$BUILD_DIR/.heroku/cmake/bin\"" > $BP_DIR/export
+
+echo "Testing binary" | indent
+$BUILD_DIR/.heroku/cmake/bin/cmake --version
