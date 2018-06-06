@@ -12,4 +12,6 @@ testCompile()
   assertCaptured "       Extracting download"
   assertCaptured "       Moving binary"
   assertCaptured "       Exporting PATH"
+  assertCaptured "       Testing binary"
+  assertCaptured "cmake version 3.8.1"
 }
