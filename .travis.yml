@@ -5,3 +5,8 @@ services:
   - docker
 
 script: ./run_tests_in_docker
+
+notifications:
+  email:
+    on_success: never
+    on_failure: change
