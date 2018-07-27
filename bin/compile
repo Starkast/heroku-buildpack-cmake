@@ -31,6 +31,7 @@ curl --silent --retry 5 $BASE_URL/$CHECKSUMS --output $CHECKSUMS_PATH
 
 echo "Verifying download" | indent
 
+set +e
 for i in 1 2 3 4; do
   gpg --quiet \
       --keyserver keys.gnupg.net \
@@ -40,6 +41,7 @@ for i in 1 2 3 4; do
     break;
   fi
 done
+set -e
 gpg --quiet --verify $SIGNATURE_PATH $CHECKSUMS_PATH
 grep $(shasum -a 256 $TARBALL_PATH) $CHECKSUMS_PATH
 
