@@ -32,13 +32,15 @@ curl --silent --retry 5 $BASE_URL/$CHECKSUMS --output $CHECKSUMS_PATH
 echo "Verifying download" | indent
 
 set +e
-for i in 1 2 3 4; do
+for i in `seq 1 360`; do
   gpg --quiet \
       --keyserver keys.gnupg.net \
       --keyserver-options timeout=5 \
       --recv-keys CBA23971357C2E6590D9EFD3EC8FEF3A7BFB4EDA
   if [ $? = 0 ]; then
     break;
+  else
+    sleep 5
   fi
 done
 set -e
