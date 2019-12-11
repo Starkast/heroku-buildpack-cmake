@@ -1,4 +1,4 @@
 #!/bin/sh
 # bin/detect BUILD_DIR
 
-! which cmake >/dev/null && echo "CMake"
+echo "CMake"
