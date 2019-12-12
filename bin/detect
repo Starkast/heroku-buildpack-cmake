@@ -1,4 +1,5 @@
 #!/bin/sh
 # bin/detect BUILD_DIR
 
-echo "CMake"
+HAVE_CMAKE=$(which cmake>/dev/null)
+[ -z "$HAVE_CMAKE" ] && echo "CMake"
