@@ -1,9 +1,2 @@
 #!/bin/sh
-
-if [ ! -f $(which cmake > /dev/null) ] 
-then
-  echo 'Cmake'
-  exit 0
-else
-  exit 1
-fi
+[ ! -f $(which cmake > /dev/null) ] && echo 'Cmake'
