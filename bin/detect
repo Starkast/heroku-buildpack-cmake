@@ -1,5 +1,9 @@
 #!/bin/sh
-# bin/detect BUILD_DIR
 
-HAVE_CMAKE=$(which cmake>/dev/null)
-[ -z "$HAVE_CMAKE" ] && echo "CMake"
+if [ ! -f $(which cmake > /dev/null) ] 
+then
+  echo 'Cmake'
+  exit 0
+else
+  exit 1
+fi
