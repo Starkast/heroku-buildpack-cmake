@@ -4,6 +4,8 @@
 
 Yet another [Heroku Buildpack][Buildpacks] for [CMake](https://cmake.org/), but this one downloads CMake from the official website, [cmake.org](https://cmake.org/download/).
 
+**NOTE**: As of [09 December 2019](https://devcenter.heroku.com/changelog-items/1713) you no longer need (or can) use this buildpack on the `heroku-16` or `heroku-18` stacks. See [#17 (comment)](https://github.com/Starkast/heroku-buildpack-cmake/issues/17#issuecomment-565724385).
+
 Usage:
 
     heroku buildpacks:set starkast/cmake
