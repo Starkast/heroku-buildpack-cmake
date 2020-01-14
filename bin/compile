@@ -34,7 +34,7 @@ echo "Verifying download" | indent
 set +e
 for i in `seq 1 360`; do
   gpg --quiet \
-      --keyserver keys.gnupg.net \
+      --keyserver pgp.mit.edu \
       --keyserver-options timeout=5 \
       --recv-keys CBA23971357C2E6590D9EFD3EC8FEF3A7BFB4EDA
   if [ $? = 0 ]; then
