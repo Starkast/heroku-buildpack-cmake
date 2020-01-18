@@ -13,6 +13,8 @@ CACHE_DIR=${2:-}
 ENV_DIR=${3:-}
 BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
 
+SIGNATURE_PUBLIC_KEY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/CBA23971357C2E6590D9EFD3EC8FEF3A7BFB4EDA.asc"
+
 CMAKE_VERSION="3.8.1"
 BASE_URL="https://cmake.org/files/v3.8"
 TARBALL="cmake-$CMAKE_VERSION-Linux-x86_64.tar.gz"
@@ -31,19 +33,7 @@ curl --silent --retry 5 $BASE_URL/$CHECKSUMS --output $CHECKSUMS_PATH
 
 echo "Verifying download" | indent
 
-set +e
-for i in `seq 1 360`; do
-  gpg --quiet \
-      --keyserver pgp.mit.edu \
-      --keyserver-options timeout=5 \
-      --recv-keys CBA23971357C2E6590D9EFD3EC8FEF3A7BFB4EDA
-  if [ $? = 0 ]; then
-    break;
-  else
-    sleep 5
-  fi
-done
-set -e
+gpg --import "$SIGNATURE_PUBLIC_KEY"
 gpg --quiet --verify $SIGNATURE_PATH $CHECKSUMS_PATH
 grep $(shasum -a 256 $TARBALL_PATH) $CHECKSUMS_PATH
 
